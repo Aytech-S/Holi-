@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holi Wishes - AyTech Studio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            animation: bgAnimation 10s infinite alternate;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+
+        #container {
+            margin-top: 50px;
+            display: none;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            animation: colorChange 1s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #ff0000; }
+            25% { color: #ff8c00; }
+            50% { color: #008000; }
+            75% { color: #0000ff; }
+            100% { color: #800080; }
+        }
+
+        .shayari-container {
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .shayari {
+            position: absolute;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            animation: slideUp 5s linear infinite;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            color: black;
+            font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 40%;
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe5c;
+        }
+
+        #login {
+            margin-top: 100px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background: #ff4b5c;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ff304f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="login">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="username" placeholder="Your Name">
+        <button onclick="sendOTP()">Get OTP</button>
+        <br>
+        <div id="otpSection" style="display: none;">
+            <h2>Enter OTP</h2>
+            <input type="number" id="otp" placeholder="Enter 4-digit OTP">
+            <button onclick="verifyOTP()">Verify</button>
+        </div>
+    </div>
+
+    <!-- Holi Wishes Section -->
+    <div id="container">
+        <h1 id="holiText">Happy Holi from <span id="userText"></span>!</h1>
+        <div class="shayari-container">
+            <div class="shayari" id="shayariText">होली आई, रंग लायी, खुशियाँ संग लायी!</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">With Love ❤️ <br>AyTech Studio ©</div>
+
+    <!-- WhatsApp Button -->
+    <a class="whatsapp-btn" href="https://wa.me/7742065298?text=Happy%20Holi%20AyTech%20Studio!" target="_blank">☎️</a>
+
+    <script>
+        let shayaris = [
+            "होली आई, रंग लायी, खुशियाँ संग लायी!",
+            "गुलाल का रंग, मिठाइयों की मिठास, गिले-शिकवे मिटायें, चलो मिलकर मनायें!",
+            "रंग बरसे भीगे चुनर वाली, रंग बरसे!",
+            "बुरा ना मानो होली है!",
+            "रंगों की बौछार हो, अपनों का प्यार हो, ऐसा होली का त्योहार हो!",
+            "होली के रंग, आपके जीवन में खुशहाली लाएं!"
+        ];
+
+        let index = 0;
+
+        function showShayari() {
+            document.getElementById('shayariText').innerText = shayaris[index];
+            index = (index + 1) % shayaris.length;
+            setTimeout(showShayari, 3000);
+        }
+
+        function sendOTP() {
+            let username = document.getElementById("username").value;
+            if (username.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            document.getElementById("otpSection").style.display = "block";
+            alert("Your OTP is 1234 ");
+        }
+
+        function verifyOTP() {
+            let otp = document.getElementById("otp").value;
+            if (otp === "1234") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("container").style.display = "block";
+                document.getElementById("userText").innerText = document.getElementById("username").value;
+                showShayari();
+                playVoice();
+            } else {
+                alert("Incorrect OTP, please try again.");
+            }
+        }
+
+        function playVoice() {
+            let speech = new SpeechSynthesisUtterance("Happy Holi to all from AyTech Studio");
+            speech.lang = "en-US";
+            speech.rate = 1;
+            speech.pitch = 1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+
+</body>
+      </html>
