@@ -195,10 +195,10 @@
 
     function playVoice() {
         let username = document.getElementById("username").value;
-        let message = `नमस्ते, ${username}! आप सभी को A y Tech स्टूडियो की तरफ़ से होली की हार्दिक शुभकामनाएँ! ${username} की तरफ़ से होली की बहुत बहुत शुभकामनाएँ!`;
+        let message = `Hello, ${username}! Welcome To AyTech Studio, Happy Holi ${username} To You And Your Family , Enjoy Your Festival!`;
 
         let speech = new SpeechSynthesisUtterance(message);
-        speech.lang = "hi-IN";
+        speech.lang = "en-US";
         speech.rate = 1;
         speech.pitch = 1;
         window.speechSynthesis.speak(speech);
