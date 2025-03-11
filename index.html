@@ -65,7 +65,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: #fff;
-            animation: slideUp 5s linear infinite;
+            animation: slideUp 7.5s linear infinite;
         }
 
         @keyframes slideUp {
@@ -153,54 +153,59 @@
     <a class="whatsapp-btn" href="https://wa.me/7742065298?text=Happy%20Holi%20AyTech%20Studio!" target="_blank">☎️</a>
 
     <script>
-        let shayaris = [
-            "होली आई, रंग लायी, खुशियाँ संग लायी!",
-            "गुलाल का रंग, मिठाइयों की मिठास, गिले-शिकवे मिटायें, चलो मिलकर मनायें!",
-            "रंग बरसे भीगे चुनर वाली, रंग बरसे!",
-            "बुरा ना मानो होली है!",
-            "रंगों की बौछार हो, अपनों का प्यार हो, ऐसा होली का त्योहार हो!",
-            "होली के रंग, आपके जीवन में खुशहाली लाएं!"
-        ];
+    let shayaris = [
+        "होली आई, रंग लायी, खुशियाँ संग लायी!",
+        "गुलाल का रंग, मिठाइयों की मिठास, गिले-शिकवे मिटायें, चलो मिलकर मनायें!",
+        "रंग बरसे भीगे चुनर वाली, रंग बरसे!",
+        "बुरा ना मानो होली है!",
+        "रंगों की बौछार हो, अपनों का प्यार हो, ऐसा होली का त्योहार हो!",
+        "होली के रंग, आपके जीवन में खुशहाली लाएं!"
+    ];
 
-        let index = 0;
+    let index = 0;
 
-        function showShayari() {
-            document.getElementById('shayariText').innerText = shayaris[index];
-            index = (index + 1) % shayaris.length;
-            setTimeout(showShayari, 3000);
+    function showShayari() {
+        document.getElementById('shayariText').innerText = shayaris[index];
+        index = (index + 1) % shayaris.length;
+        setTimeout(showShayari, 5000);
+    }
+
+    function sendOTP() {
+        let username = document.getElementById("username").value;
+        if (username.trim() === "") {
+            alert("Please enter your name!");
+            return;
         }
+        document.getElementById("otpSection").style.display = "block";
+        alert("Your OTP is 1234");
+    }
 
-        function sendOTP() {
-            let username = document.getElementById("username").value;
-            if (username.trim() === "") {
-                alert("Please enter your name!");
-                return;
-            }
-            document.getElementById("otpSection").style.display = "block";
-            alert("Your OTP is 1234 ");
+    function verifyOTP() {
+        let otp = document.getElementById("otp").value;
+        if (otp === "1234") {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("container").style.display = "block";
+            document.getElementById("userText").innerText = document.getElementById("username").value;
+            showShayari();
+            playVoice();
+        } else {
+            alert("Incorrect OTP, please try again.");
         }
+    }
 
-        function verifyOTP() {
-            let otp = document.getElementById("otp").value;
-            if (otp === "1234") {
-                document.getElementById("login").style.display = "none";
-                document.getElementById("container").style.display = "block";
-                document.getElementById("userText").innerText = document.getElementById("username").value;
-                showShayari();
-                playVoice();
-            } else {
-                alert("Incorrect OTP, please try again.");
-            }
-        }
+    function playVoice() {
+        let username = document.getElementById("username").value;
+        let message = `नमस्ते, ${username}! आप सभी को A y Tech स्टूडियो की तरफ़ से होली की हार्दिक शुभकामनाएँ! ${username} की तरफ़ से होली की बहुत बहुत शुभकामनाएँ!`;
 
-        function playVoice() {
-            let speech = new SpeechSynthesisUtterance("Happy Holi to all from AyTech Studio");
-            speech.lang = "en-US";
-            speech.rate = 1;
-            speech.pitch = 1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+        let speech = new SpeechSynthesisUtterance(message);
+        speech.lang = "hi-IN";
+        speech.rate = 1;
+        speech.pitch = 1;
+        window.speechSynthesis.speak(speech);
+    }
+</script>
+        
+    
 
 </body>
-      </html>
+</html>
