@@ -195,11 +195,15 @@
 
     function playVoice() {
     let username = document.getElementById("username").value;
-    let message = 'Welcome to AyTech Studio, ${username} Wishing you a vibrant and joyful Holi filled with colors of happiness, success, and creativity! May your life be as bright and beautiful as the festival of colors.Happy Holi ${username}!';
+    let message = `Welcome to AyTech Studio ${username}, Wishing you a vibrant and joyful Holi filled with colors of happiness, success, and creativity! May your life be as bright and beautiful as the festival of colors. Happy Holi ${username}!`;
+    
     let speech = new SpeechSynthesisUtterance(message);
     speech.lang = "en-US";
     speech.rate = 0.9;  // Thoda slow kiya
     speech.pitch = 1.2; // Female voice jaisa sound
+
+    speechSynthesis.speak(speech);
+        }
 
     // Wait for voices to load
     speechSynthesis.onvoiceschanged = function () {
