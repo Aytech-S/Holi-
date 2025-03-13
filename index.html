@@ -195,8 +195,7 @@
 
     function playVoice() {
     let username = document.getElementById("username").value;
-    let message = `Hello, ${username}! Welcome To AyTech Studio. Happy Holi, ${username}! Enjoy Your Festival!`;
-
+    let message = 'Welcome to AyTech Studio, ${username} Wishing you a vibrant and joyful Holi filled with colors of happiness, success, and creativity! May your life be as bright and beautiful as the festival of colors.Happy Holi ${username}!';
     let speech = new SpeechSynthesisUtterance(message);
     speech.lang = "en-US";
     speech.rate = 0.9;  // Thoda slow kiya
